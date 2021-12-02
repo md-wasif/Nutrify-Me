@@ -7,12 +7,20 @@ const passportConf = require('../passport');
 
 const {validateBody, schemas} = require('../validation/routeValidation');
 const passportSignIn = passport.authenticate('local', {session: false});
+const passportGoogleOauth = passport.authenticate('google-plus-token', {session: false});
+const passportFacebookOauth = passport.authenticate('facebook-token', {session: false});
 
 router.route('/register')
   .post(validateBody(schemas.authSchema), userController.register);
 
 router.route('/login')
   .post(validateBody(schemas.authSchema), passportSignIn, userController.login);  
+
+router.route('/oauth/google')
+  .post(passportGoogleOauth, userController.googleOAuth);  
+
+router.route('/oauth/facebook')
+  .post(passportFacebookOauth, userController.facebookOAuth);   
 
 
 module.exports = router;

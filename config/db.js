@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
 
 
-
 const connectDB = async () => {
-  try
-  {
-
+  try{
   mongoose.connect('mongodb://localhost/NutrifyMe', {
     useUnifiedTopology: true,
     useNewUrlParser: true,
