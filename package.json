@@ -4,13 +4,16 @@
   "description": "Oauth-authentication",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "server-dev": "nodemon server/app.js",
+    "client-dev": "npm start --prefix client",
+    "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "concurrently": "^6.4.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
