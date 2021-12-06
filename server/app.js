@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const passport = require('passport');
+const cors = require('cors');
 
 
 
@@ -14,6 +15,7 @@ const app = express();
 // parse application/json
 app.use(bodyParser.json());
 app.use(passport.initialize());
+app.use(cors());
 
 //Routes
 app.use('/users', require('./routes/userRoute'));

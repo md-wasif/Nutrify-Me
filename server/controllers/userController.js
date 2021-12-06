@@ -18,7 +18,7 @@ module.exports = {
 
         const foundUser = await User.findOne({ "local.email": email });
         if (foundUser) {
-            res.status(403).json({ error: 'Email is already in use..' });
+            return res.status(403).json({ error: 'Email is already in use..' });
         }
         const newUser = new User({
             method: 'local',
@@ -29,15 +29,21 @@ module.exports = {
         });
         await newUser.save();
         //Generate the token 
-        // const token = signToken(newUser);
-        // res.status(200).json({token});
-        res.status(200).json({ user: newUser.id });
+        const token = signToken(newUser);
+        res.status(200).json({token});
+        //res.status(200).json({ user: newUser.id });
     },
 
     login: async (req, res, next) => {
         const token = signToken(req.user);
         res.status(200).json({ token });
     },
+
+    signOut: async (req, res, next) => {
+        res.clearCookie('access_token');
+        res.json({ success: true });
+      },
+
     googleOAuth: async (req, res, next) => {
         const token = signToken(req.user);
         res.status(200).json({ token });
