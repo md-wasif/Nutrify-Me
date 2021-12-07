@@ -8,7 +8,7 @@ const passportConf = require('../passport');
 const {validateBody, schemas} = require('../validation/routeValidation');
 const passportSignIn = passport.authenticate('local', {session: false});
 const passportJWT = passport.authenticate('jwt', { session: false });
-const passportGoogleOauth = passport.authenticate('google-plus-token', {session: false});
+const passportGoogleOauth = passport.authenticate('googleToken', {session: false});
 const passportFacebookOauth = passport.authenticate('facebook-token', {session: false});
 
 

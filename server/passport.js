@@ -2,7 +2,7 @@ const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const LocalStrategy = require('passport-local').Strategy;
-const GooglePlusTokenStrategy = require('passport-google-plus-token');
+const GoogleTokenStrategy = require('passport-google-token').Strategy;
 const FacebookTokenStrategy = require('passport-facebook-token');
 const { JWT_SECRET } = require('./config/index');
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET } = require('./config/index');
@@ -31,7 +31,7 @@ passport.use(new JwtStrategy({
 
 
 //Google Services Strategy..
-passport.use(new GooglePlusTokenStrategy({
+passport.use('googleToken', new GoogleTokenStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET
 }, async (accessToken, refreshToken, profile, done) => {

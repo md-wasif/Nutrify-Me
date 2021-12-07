@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
@@ -10,9 +10,10 @@ import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import SignOut from './components/SignOut';
 import reducers from './reducers';
 import thunk from 'redux-thunk';
+import authGuard from './components/HOCs/authGuard';
+
 
 const jwtToken = localStorage.getItem('JWT_TOKEN');
 
@@ -23,17 +24,16 @@ ReactDOM.render(
         isAuthenticated: jwtToken ? true : false
       }
     }, applyMiddleware(thunk))}>
-    <BrowserRouter>
+    <Router>
       <App>
-          <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signout" element={<SignOut />} />
-          </Routes>
+          <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/dashboard" component={authGuard(Dashboard)} />
+          </Switch>
       </App>
-    </BrowserRouter>
+    </Router>
     </Provider>,
 document.querySelector('#root'));
 // If you want to start measuring performance in your app, pass a function
