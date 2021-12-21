@@ -1,4 +1,4 @@
-# Nutrify-Me
+# NutrifyMe
 
 
 ## Steps to Run:
