@@ -4,7 +4,7 @@
   "description": "Oauth-authentication",
   "main": "app.js",
   "scripts": {
-    "server-dev": "nodemon server/app.js",
+    "server-dev": "nodemon app.js",
     "client-dev": "npm start --prefix client",
     "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
