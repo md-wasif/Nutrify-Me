@@ -4,7 +4,7 @@
   "description": "Oauth-authentication",
   "main": "app.js",
   "scripts": {
-    "server-dev": "nodemon server/app.js",
+    "server-dev": "nodemon app.js",
     "client-dev": "npm start --prefix client",
     "start-dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
@@ -21,7 +21,6 @@
     "joi": "^17.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "passport": "^0.5.0",
     "passport-facebook-token": "^4.0.0",

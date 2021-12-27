@@ -27,5 +27,8 @@ router.route('/oauth/google')
 router.route('/oauth/facebook')
   .post(passportFacebookOauth, userController.facebookOAuth);   
 
+router.route('/dashboard')
+  .get(passportJWT, userController.dashboard);  
+
 
 module.exports = router;

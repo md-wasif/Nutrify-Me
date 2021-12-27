@@ -25,25 +25,25 @@ module.exports = {
         //Check is there a Google account with the same Email...
         foundUser = await User.findOne({
             $or: [
-                {"google.email": email},
-                {"facebook.email": email},
+                { "google.email": email },
+                { "facebook.email": email },
             ]
         });
-        if(foundUser){
+        if (foundUser) {
             //Merge them into a local..
             foundUser.methods.push('local');
             foundUser.local = {
                 email: email,
                 password: password
             }
-        await foundUser.save();
-        let token = signToken(foundUser);
+            await foundUser.save();
+            let token = signToken(foundUser);
 
-        res.cookie('access_token', token, {
-            httpOnly: true
-        });
-        res.status(200).json({ success: true });
-    }
+            res.cookie('access_token', token, {
+                httpOnly: true
+            });
+            res.status(200).json({ success: true });
+        }
 
         //Create a new user...
         const newUser = new User({
@@ -55,7 +55,7 @@ module.exports = {
         });
         await newUser.save();
         //Generate the token 
-         token = signToken(newUser);
+        token = signToken(newUser);
         res.cookie('access_token', token, {
             httpOnly: true
         });
@@ -79,5 +79,8 @@ module.exports = {
     facebookOAuth: async (req, res, next) => {
         const token = signToken(req.user);
         res.status(200).json({ token });
+    },
+    dashboard: async (req, res, next) => {
+        console.log('Private api dashboard');
     }
 }
